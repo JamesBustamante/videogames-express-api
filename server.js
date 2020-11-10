@@ -1,13 +1,20 @@
+require("dotenv").config();
+
 const express = require('express');
 const app = express();
-app.listen(3000, () => console.log('server has started at port 3000'));
+const mongoose = require("mongoose");
 
-app
-  .get("/", (req, res) => {
-    console.log(req.url);
-    res.send("<h1>Hello</h1>"); //determine the content-type automatically
-  })
-  .post("/", (req, res) => {})
-  .patch("/", (req, res) => {})
-  .put("/", (req, res) => {})
-  .delete("/", (req, res) => {});
+// connect to db using mongoose
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true }); 
+const db = mongoose.connection;
+db.on("error", error => console.log(error));
+db.once("open", () => console.log("connection to db established"));
+
+app.use(express.json());
+
+// http://<endpoint>/videogames route
+const videogamesRouter = require("./routes/videogames");
+app.use("/videogames", videogamesRouter); // set route and call route functions
+
+// Set-up the server on port defined in .env
+app.listen(process.env.PORT, () => console.log(`server has started at port ${process.env.PORT}`));
