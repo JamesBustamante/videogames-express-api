@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Upload Example</title>
+</head>
+<body>
+    <h1>Videogame Form Repository</h1>
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <label for="Image">Image:</label><br>
+    <input type="file" name="upload" multiple>
+    <br>
+    <label for="title">Title:</label><br>
+    <input type="text" name="title"><br>
+    <label for="platform">Platform:</label><br>
+    <input type="text" name="platform"><br>
+    <label for="releaseDate">Release Date:</label><br>
+    <input type="date" name="releaseDate"><br>
+    <br>
+    <input type="submit" value="Submit Game">
+</form>
+</body>
+</html>

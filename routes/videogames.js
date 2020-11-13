@@ -3,9 +3,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Videogame = require("../models/Videogame");
+var formidable = require('formidable');
 
 // Get All Route
 router.get("/", async (req, res) => {
+    console.log("getting games...")
     Videogame.find()
     .then((resp) => res.status(200).json(resp))
     .catch((err) => res.status(400).json("Request Failed"));
@@ -75,9 +77,7 @@ async function getUser(req, res, next) {
 }
 
 
-  
 
   
   
-
 module.exports = router;
